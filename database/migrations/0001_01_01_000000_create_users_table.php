@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('username');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -37,7 +37,7 @@ return new class extends Migration
         });
 
         DB::table('users')->insert([
-            ['id' => 1, 'name' => 'admin', 'email' => 'admin@gmail.com', 'password' => '123456789'],
+            ['id' => 1, 'username' => 'admin', 'email' => 'admin@gmail.com', 'password' => '123456789'],
         ]);
     }
 

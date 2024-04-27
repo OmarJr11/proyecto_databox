@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\UserRole;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Role extends Model
+class Roles extends Model
 {
     use HasFactory;
 
@@ -17,4 +19,9 @@ class Role extends Model
         'name',
         'creator',
     ];
+
+    protected static function userRole(): HasOne
+    {
+        return $this->hasOne(UserRole::class);
+    }
 }
