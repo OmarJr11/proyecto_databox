@@ -2,7 +2,7 @@
 Proyecto para la materia Desarrollo web
 
 ## Vistas
-'/'
-'/register'
-'/login'
-'admin'
+- '/'
+- '/register'
+- '/login'
+- '/admin'
