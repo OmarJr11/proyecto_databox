@@ -57,4 +57,18 @@ class UserController extends Controller
         Auth::logout();
         return redirect(route('login'));
     }
+
+    function delete(User $user)
+    {
+        $userRole=UserRole::where('id_user',$user->id)->delete();
+        $user->delete();
+        return redirect()->back()->with('success', 'User deleted successfully');
+    }
+
+    function changeRol(User $user)
+    {
+        $oldRole=UserRole::where('id_user',$user->id)->first();
+        $userRole=UserRole::where('id_user',$user->id)->update(['id_role'=> $oldRole->id_role == 1 ? 2 : 1]);
+        return redirect()->back()->with('success', 'User deleted successfully');
+    }
 }

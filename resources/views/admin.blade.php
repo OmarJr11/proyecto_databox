@@ -37,26 +37,47 @@
         <div class="container">
             <!--Section: Content-->
             <section class="text-center text-md-start">
-                <!-- Post -->
-                <div class="row">
-                    <div class="col-md-4 mb-4">
-                        <div class="bg-image hover-overlay shadow-1-strong rounded" data-mdb-ripple-init data-mdb-ripple-color="light">
-                            <img src="{{asset('img/orn.jpg')}}" class="img-fluid" />
-                            <a href="#!">
-                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-8 mb-4 text-left">
-                        <h5>Usuario Administrador: {{$user->name}}</h5>
-                        <h5>ID: {{$user->id}}</h5>
-                        <p>
-                            Vamos a Administrar!
-                        </p>
-
-                        <button type="button" class="btn btn-primary" data-mdb-ripple-init>Read</button>
-                    </div>
+                <div class="col-md-8 mb-4 text-left">
+                    <h5> Usuario Administrador: {{$user->name}} ID: #{{$user->id}}</h5>
                 </div>
+                <!-- Post -->
+                @if(count($users) > 0)
+                    <ul class="list-group">
+                        @foreach ($users as $u)
+                            <li class="list-group-item d-flex justify-content-around align-items-center">
+                                <div class="row w-100 d-flex align-items-center justify-content-around">
+                                    <div class="d-flex align-items-center" style="width: auto; margin-right: 30px;">
+                                        ID: #{{$u->id}}
+                                    </div>
+                                    <div class="d-flex align-items-center" style="width: auto; margin-right: 30px;">
+                                        Nombre: {{$u->name}}
+                                    </div>
+                                    <div class="d-flex align-items-center" style="width: auto;">
+                                        Role: '{{$u->role}}'
+                                    </div>
+
+                                    <div class="d-flex align-items-center" style="width: auto;">
+                                        <form method="POST" action="{{ route('changeRol', $u) }}">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-primary btn-lg">Cambiar Rol</button>
+                                        </form>
+                                    </div>
+
+                                    <div class="d-flex align-items-center" style="width: auto;">
+                                        <form method="POST" action="{{ route('delete', $u) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-lg">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <h1>No hay usuarios</h1>
+                @endif
             </section>
             <!--Section: Content-->
         </div>
